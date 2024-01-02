@@ -1,0 +1,68 @@
+APIS : 
+[NOTE : I Have Also Use Swagger For Documentation, 
+        So You Can Check swagger-output.json file or 
+        just go on the endpoint /api-docs for documentation(with ui)
+]
+
+1) /api/auth
+    a) /createuser 
+        - POST 
+        - creates a new user in the database
+        - body :
+                name     : minimum of length 3
+                email    : should be a email and unique for every user
+                password : minimum of length 8
+        - returns : auth-token
+
+    b) /login 
+        - POST 
+        - logins a existing user
+        - body : 
+                email
+                password
+        - returns : auth-token
+
+    c) /getuser 
+        - GET 
+        - for getting user information
+        - headers : auth-token
+        - returns : user information
+
+2) /api/note
+    a) /addnote 
+        - POST 
+        - adds a note for a user
+        - headers : auth-token
+        - body : 
+                title   : minimum of length 3
+                content : minimum of length 5
+                tag     : optional
+        - returns : note 
+
+    b) /getnotes 
+        - GET 
+        - returns all notes for a user
+        headers : auth-token
+        returns : all notes of that user
+
+    c) /getnote/:id 
+        - GET 
+        - return the note for a user of that id
+        - headers : auth-token
+        - returns : note of provided id
+
+    d) /updatenote/:id 
+        - PUT 
+        - update the note of given id which given data 
+        - headers : auth-token
+        - body :  
+                title   : minimum of length 3(optional)
+                content : minimum of length 5(optional)
+                tag     : optional
+        - returns : updated note
+    
+    e) /deletenote/:id
+        - DELETE 
+        - deletes the note with the given id
+        - headers : auth-token
+        - returns  : confirmation for deleted note
